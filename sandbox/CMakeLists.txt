@@ -1,0 +1,8 @@
+file(GLOB_RECURSE SANDBOX_SRC ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+set (SANDBOX_TARGET sandbox)
+set (SANBOX_LIBS blink)
+
+add_executable(${SANDBOX_TARGET} ${SANDBOX_SRC})
+set_property(TARGET ${SANDBOX_TARGET} PROPERTY CXX_STANDARD 20)
+target_include_directories(${SANDBOX_TARGET} PUBLIC ${BLINK_INCLUDE})
+target_link_libraries(${SANDBOX_TARGET} PUBLIC ${SANBOX_LIBS})
