@@ -18,7 +18,11 @@ class Server : public net::Server {
     void addRouter(Router* router);
     void setResourcePath(const std::string& path);
 
+    const ResourceInfo* getResourceInfo() const;
+
    private:
+    awaitable<bool> findRoute(const Request& request, net::Connection& connection);
+
     awaitable<void> onConnection(net::Connection connection) override;
     awaitable<Request> readRequest(net::Connection& connection);
 

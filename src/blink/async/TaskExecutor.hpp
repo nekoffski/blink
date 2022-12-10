@@ -14,7 +14,7 @@ namespace blink::async {
 
 template <typename T>
 concept ExecutorType = requires {
-    {T{[]() {}}};
+    {T([]() {})};
 };
 
 template <ExecutorType Executor = std::jthread> struct TaskExecutor {
