@@ -2,7 +2,7 @@
 
 #include <kc/core/FileSystem.h>
 
-#include "blink/async/Delegate.hpp"
+#include "blink/async/TaskExecutor.hpp"
 
 namespace blink::http::response {
 
@@ -29,7 +29,7 @@ HtmlFileResponse::HtmlFileResponse(const std::string& path) : m_path(path) {}
 awaitable<std::string> HtmlFileResponse::getBody(const ResourceInfo& resourceInfo) const {
     const auto fullPath = fmt::format("{}/{}", resourceInfo.resourcePath, m_path);
 
-    co_await_return async::delegateToThread([&fullPath]() -> std::string {
+    co_await_return async::TaskExecutor<>::callInThread([&fullPath]() -> std::string {
         return kc::core::FileSystem{}.readFile(fullPath);
     });
 }
