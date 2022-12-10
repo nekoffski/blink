@@ -26,7 +26,7 @@ awaitable<void> Server::onConnection(net::Connection connection) {
                 auto handler  = router->getHandler(request.path);
                 auto response = co_await handler(request);
 
-                co_await connection.sendResponse(response->get(m_resourceInfo));
+                co_await connection.sendResponse(co_await response->get(m_resourceInfo));
 
                 co_return;
             }
@@ -36,7 +36,7 @@ awaitable<void> Server::onConnection(net::Connection connection) {
         response::Text response{"Url not found"};
         response.setStatus(http::status::notFound);
 
-        co_await connection.sendResponse(response.get(m_resourceInfo));
+        co_await connection.sendResponse(co_await response.get(m_resourceInfo));
 
     } catch (std::exception& e) {
         LOG_WARN("Connection processing error: {}", e.what());

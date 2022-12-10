@@ -1,5 +1,6 @@
 #pragma once
 
+#include <boost/asio.hpp>
 #include <boost/asio/co_spawn.hpp>
 #include <boost/asio/detached.hpp>
 #include <boost/asio/io_context.hpp>
@@ -20,3 +21,5 @@ using boost::asio::use_awaitable;
 using boost::asio::ip::tcp;
 
 namespace coro = boost::asio::this_coro;
+
+#define co_await_return co_return co_await

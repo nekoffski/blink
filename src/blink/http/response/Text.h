@@ -11,7 +11,7 @@ class Text : public Response {
     explicit Text(const std::string& text);
 
    private:
-    std::string getBody(const ResourceInfo& resourceInfo) const override;
+    awaitable<std::string> getBody(const ResourceInfo& resourceInfo) const override;
 
     std::string m_text;
 };

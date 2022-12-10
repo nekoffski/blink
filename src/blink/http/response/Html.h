@@ -19,7 +19,7 @@ class HtmlTextResponse : public Html {
    public:
     explicit HtmlTextResponse(const std::string& text);
 
-    std::string getBody(const ResourceInfo& resourceInfo) const override;
+    awaitable<std::string> getBody(const ResourceInfo& resourceInfo) const override;
 
    private:
     std::string m_text;
@@ -29,7 +29,7 @@ class HtmlFileResponse : public Html {
    public:
     explicit HtmlFileResponse(const std::string& path);
 
-    std::string getBody(const ResourceInfo& resourceInfo) const override;
+    awaitable<std::string> getBody(const ResourceInfo& resourceInfo) const override;
 
    private:
     std::string m_path;
